@@ -1,4 +1,4 @@
-package com.suonk.educationapptest.ui
+package com.suonk.educationapptest.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -29,8 +29,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun delayedToMainActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, WelcomeActivity::class.java))
             finish()
-        }, 5000)
+        }, 4000)
     }
 }
