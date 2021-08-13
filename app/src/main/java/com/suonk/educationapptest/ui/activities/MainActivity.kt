@@ -1,4 +1,4 @@
-package com.suonk.educationapptest.ui
+package com.suonk.educationapptest.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
