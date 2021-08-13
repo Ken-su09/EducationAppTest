@@ -19,7 +19,9 @@ class WelcomeActivity : AppCompatActivity() {
     private fun initializeUI() {
         binding.logInButton.setOnClickListener {
             startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
-            finish()
+        }
+        binding.signUpButton.setOnClickListener {
+            startActivity(Intent(this@WelcomeActivity, SignUpActivity::class.java))
         }
     }
 }

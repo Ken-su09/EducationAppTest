@@ -4,15 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_login_background"
+    android:background="@drawable/ic_sign_up_background"
     tools:context=".ui.activities.WelcomeActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/login_toolbar"
+        android:id="@+id/sign_up_toolbar"
         style="@style/ToolbarTheme"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/email_layout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/ic_user" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_user" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:hint="Name"
+            android:paddingStart="45dp"
+            android:textColor="@color/app_color" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/email_layout"
@@ -37,7 +73,8 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
-            app:srcCompat="@drawable/ic_email" />
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_email_blue" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -55,16 +92,16 @@
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/log_in_button">
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_log_in_button">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="16dp"
-            android:layout_alignParentBottom="true"
             app:srcCompat="@drawable/ic_password" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -86,20 +123,8 @@
             android:textColor="@color/app_color" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="40dp"
-        android:text="Forgot password ?"
-        android:textColor="@color/app_color"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_layout" />
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/log_in_button"
+        android:id="@+id/sign_up_log_in_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"

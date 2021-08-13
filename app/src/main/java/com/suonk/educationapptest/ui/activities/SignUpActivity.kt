@@ -4,15 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.suonk.educationapptest.R
-import com.suonk.educationapptest.databinding.ActivityLoginBinding
+import com.suonk.educationapptest.databinding.ActivitySignUpBinding
 
-class LoginActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initializeUI()
@@ -25,15 +25,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initializeActionBar() {
-        setSupportActionBar(binding.loginToolbar)
+        setSupportActionBar(binding.signUpToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
     }
 
     private fun initializeButtons() {
-        binding.logInButton
-        binding.signUpButton.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+        binding.signUpLogInButton.setOnClickListener {
+            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
         }
     }
 }

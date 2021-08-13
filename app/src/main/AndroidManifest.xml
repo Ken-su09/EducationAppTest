@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EducationAppTest">
         <activity
+            android:name=".ui.activities.SignUpActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="true">
             <meta-data
@@ -26,6 +29,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
