@@ -1,10 +1,15 @@
 package com.suonk.educationapptest.ui.activities
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import com.suonk.educationapptest.R
@@ -27,6 +32,7 @@ class SignUpActivity : AppCompatActivity() {
 
         initializeActionBar()
         initializeButtons()
+        animationPasswordIconClick()
 
         binding.signUpEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -82,5 +88,31 @@ class SignUpActivity : AppCompatActivity() {
 //            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
 //        } else {
 //        }
+    }
+
+    private fun animationPasswordIconClick() {
+        binding.signUpPasswordGoToVisible.setOnClickListener {
+            val frameAnimation = binding.signUpPasswordGoToVisible.drawable as AnimationDrawable
+            frameAnimation.start()
+            Handler(Looper.getMainLooper()).postDelayed({
+                frameAnimation.stop()
+                binding.signUpPasswordGoToVisible.visibility = View.GONE
+                binding.signUpPasswordGoToInvisible.visibility = View.VISIBLE
+                binding.signUpPassword.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+            }, 525)
+        }
+
+        binding.signUpPasswordGoToInvisible.setOnClickListener {
+            val frameAnimation = binding.signUpPasswordGoToInvisible.drawable as AnimationDrawable
+            frameAnimation.start()
+            Handler(Looper.getMainLooper()).postDelayed({
+                frameAnimation.stop()
+                binding.signUpPasswordGoToVisible.visibility = View.VISIBLE
+                binding.signUpPasswordGoToInvisible.visibility = View.GONE
+                binding.signUpPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
+            }, 525)
+        }
     }
 }

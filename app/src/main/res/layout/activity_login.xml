@@ -12,6 +12,7 @@
         style="@style/ToolbarTheme"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
@@ -90,6 +91,7 @@
             app:srcCompat="@drawable/ic_password_blue" />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -99,12 +101,27 @@
             android:textColor="@color/app_color" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/login_password_go_to_visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
-            app:srcCompat="@drawable/ic_password_invisible" />
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/password_visible_animation" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/login_password_go_to_invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"
+            app:srcCompat="@drawable/password_invisible_animation" />
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatCheckBox
