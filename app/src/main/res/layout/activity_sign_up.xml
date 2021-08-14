@@ -77,13 +77,26 @@
             app:srcCompat="@drawable/ic_email_blue" />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/sign_up_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:paddingStart="45dp"
+            android:paddingEnd="35dp"
             android:textColor="@color/app_color" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sign_up_email_validation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_check_email" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -121,6 +134,14 @@
             android:inputType="textPassword"
             android:paddingStart="45dp"
             android:textColor="@color/app_color" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            app:srcCompat="@drawable/ic_password_invisible" />
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -142,7 +163,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
-        app:layout_constraintTop_toBottomOf="@+id/log_in_button">
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_log_in_button">
 
         <View
             android:layout_width="match_parent"
