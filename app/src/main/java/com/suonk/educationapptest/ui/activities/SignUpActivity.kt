@@ -11,26 +11,46 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivitySignUpBinding
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
 
+    //region =========================================== Example ============================================
+
+    //endregion
+
+    //region ========================================== Val or Var ==========================================
+
     private lateinit var binding: ActivitySignUpBinding
+
+    //Firebase
+    private lateinit var auth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
+
+    //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        auth = FirebaseAuth.getInstance()
         initializeUI()
     }
 
-    private fun initializeUI() {
+    //region ========================================== Functions ===========================================
 
-        initializeActionBar()
+    //region ========================================== Initialize ==========================================
+
+    private fun initializeUI() {
         initializeButtons()
         animationPasswordIconClick()
 
@@ -42,53 +62,39 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                checkEmail()
+                checkEmailConstantly()
             }
         })
-    }
-
-    private fun initializeActionBar() {
-        setSupportActionBar(binding.signUpToolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
     }
 
     private fun initializeButtons() {
         binding.signUpLogInButton.setOnClickListener {
             startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
         }
-    }
 
-    private fun checkEmail() {
-        val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
-        val userEmail = binding.signUpEmail.text.toString()
-
-        if (userEmail.trim().matches(emailPattern.toRegex())) {
-            binding.signUpEmailValidation.visibility = View.VISIBLE
-            binding.signUpEmailValidation.setImageDrawable(
-                AppCompatResources.getDrawable(
-                    this,
-                    R.drawable.ic_check_email
+        binding.signUpButton.setOnClickListener {
+            if (checkIfFieldsAreEmpty()) {
+                Toast.makeText(
+                    this@SignUpActivity,
+                    "Fields should not be empty",
+                    Toast.LENGTH_SHORT
                 )
-            )
-        } else {
-            if (userEmail.isEmpty()) {
-                binding.signUpEmailValidation.visibility = View.INVISIBLE
+                    .show()
             } else {
-                binding.signUpEmailValidation.visibility = View.VISIBLE
-                binding.signUpEmailValidation.setImageDrawable(
-                    AppCompatResources.getDrawable(
-                        this,
-                        R.drawable.ic_check_email_cross
+                if (!checkEmailValidationSignUp()) {
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "The email is not valid",
+                        Toast.LENGTH_SHORT
                     )
-                )
+                        .show()
+                }
+                registerUser()
             }
         }
-//        if (userEmail.isEmpty()) {
-//            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-//        } else {
-//        }
     }
+
+    //endregion
 
     private fun animationPasswordIconClick() {
         binding.signUpPasswordGoToVisible.setOnClickListener {
@@ -115,4 +121,86 @@ class SignUpActivity : AppCompatActivity() {
             }, 525)
         }
     }
+
+    private fun registerUser() {
+        auth.createUserWithEmailAndPassword(
+            binding.signUpEmail.text.toString(),
+            binding.signUpPassword.text.toString()
+        )
+            .addOnCompleteListener(this) {
+                if (it.isSuccessful) {
+                    val user: FirebaseUser? = auth.currentUser
+                    val userId: String = user!!.uid
+
+                    databaseReference =
+                        FirebaseDatabase.getInstance().getReference("Users").child(userId)
+
+                    val hashMap: HashMap<String, String> = HashMap()
+                    hashMap["userId"] = userId
+                    hashMap["userName"] = binding.signUpUsername.text.toString()
+                    hashMap["profileImage"] = ""
+
+                    databaseReference.setValue(hashMap).addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                            finish()
+                        }
+                    }
+                } else {
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "Fail",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+    }
+
+    //region ========================================== CheckField ==========================================
+
+    private fun checkIfFieldsAreEmpty(): Boolean {
+        return binding.signUpUsername.text!!.isEmpty() ||
+                binding.signUpEmail.text!!.isEmpty() ||
+                binding.signUpPassword.text!!.isEmpty()
+
+    }
+
+    private fun checkEmailValidationSignUp(): Boolean {
+        val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
+        val userEmail = binding.signUpEmail.text.toString()
+
+        return userEmail.trim().matches(emailPattern.toRegex())
+    }
+
+    private fun checkEmailConstantly() {
+        val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
+        val userEmail = binding.signUpEmail.text.toString()
+
+        if (userEmail.trim().matches(emailPattern.toRegex())) {
+            binding.signUpEmailValidation.visibility = View.VISIBLE
+            binding.signUpEmailValidation.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    this,
+                    R.drawable.ic_check_email
+                )
+            )
+        } else {
+            if (userEmail.isEmpty()) {
+                binding.signUpEmailValidation.visibility = View.INVISIBLE
+            } else {
+                binding.signUpEmailValidation.visibility = View.VISIBLE
+                binding.signUpEmailValidation.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        this,
+                        R.drawable.ic_check_email_cross
+                    )
+                )
+            }
+        }
+    }
+
+    //endregion
+
+    //endregion
 }

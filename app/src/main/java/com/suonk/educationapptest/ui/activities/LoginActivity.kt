@@ -30,8 +30,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initializeUI() {
-
-        initializeActionBar()
         initializeButtons()
         animationPasswordIconClick()
 
@@ -46,12 +44,6 @@ class LoginActivity : AppCompatActivity() {
                 checkEmail()
             }
         })
-    }
-
-    private fun initializeActionBar() {
-        setSupportActionBar(binding.loginToolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
     }
 
     private fun initializeButtons() {

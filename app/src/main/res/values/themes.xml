@@ -14,10 +14,4 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="ToolbarTheme">
-        <item name="android:textColorSecondary">@color/white</item>
-        <item name="android:colorControlNormal">@color/white</item>
-        <item name="backgroundColor">@color/transparent</item>
-    </style>
-
 </resources>

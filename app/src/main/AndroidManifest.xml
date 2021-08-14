@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_app_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EducationAppTest">
+        android:theme="@style/Theme.EducationAppTest"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.activities.SignUpActivity"
             android:exported="true" />
