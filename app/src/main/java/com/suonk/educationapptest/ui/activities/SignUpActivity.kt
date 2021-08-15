@@ -35,6 +35,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
 
+    private val toastLength = Toast.LENGTH_SHORT
+
     //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,27 +76,27 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signUpButton.setOnClickListener {
             if (checkIfFieldsAreEmpty()) {
-                Toast.makeText(
-                    this@SignUpActivity,
-                    "Fields should not be empty",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                Toast.makeText(this, "Fields should not be empty", Toast.LENGTH_SHORT).show()
             } else {
                 if (!checkEmailValidationSignUp()) {
-                    Toast.makeText(
-                        this@SignUpActivity,
-                        "The email is not valid",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    Toast.makeText(this, "The email is not valid", Toast.LENGTH_SHORT).show()
                 }
-                registerUser()
+                if (checkPassword()) {
+                    Toast.makeText(
+                        this,
+                        "Your password must contain more than 5 characters",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    registerUser()
+                }
             }
         }
     }
 
     //endregion
+
+    //region ========================================== Animations ==========================================
 
     private fun animationPasswordIconClick() {
         binding.signUpPasswordGoToVisible.setOnClickListener {
@@ -122,40 +124,46 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    //endregion
+
+    //region =========================================== Firebase ===========================================
+
     private fun registerUser() {
-        auth.createUserWithEmailAndPassword(
-            binding.signUpEmail.text.toString(),
-            binding.signUpPassword.text.toString()
-        )
-            .addOnCompleteListener(this) {
-                if (it.isSuccessful) {
-                    val user: FirebaseUser? = auth.currentUser
-                    val userId: String = user!!.uid
+        val email = binding.signUpEmail.text.toString()
+        val password = binding.signUpPassword.text.toString()
 
-                    databaseReference =
-                        FirebaseDatabase.getInstance().getReference("Users").child(userId)
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                val user: FirebaseUser? = auth.currentUser
+                val userId: String = user!!.uid
 
-                    val hashMap: HashMap<String, String> = HashMap()
-                    hashMap["userId"] = userId
-                    hashMap["userName"] = binding.signUpUsername.text.toString()
-                    hashMap["profileImage"] = ""
+                databaseReference =
+                    FirebaseDatabase.getInstance().getReference("Users").child(userId)
 
-                    databaseReference.setValue(hashMap).addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-                            finish()
-                        }
+                val hashMap: HashMap<String, String> = HashMap()
+                hashMap["userId"] = userId
+                hashMap["userName"] = binding.signUpUsername.text.toString()
+                hashMap["profileImage"] = ""
+
+                databaseReference.setValue(hashMap).addOnCompleteListener(this) { it ->
+                    if (it.isSuccessful) {
+//                        startActivity(Intent(this, MainActivity::class.java))
+//                        finish()
                     }
-                } else {
-                    Toast.makeText(
-                        this@SignUpActivity,
-                        "Fail",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
                 }
+                Toast.makeText(this, "Account created !", toastLength).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("user_email", email)
+                intent.putExtra("user_password", password)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Fail", toastLength).show()
             }
+        }
     }
+
+    //endregion
 
     //region ========================================== CheckField ==========================================
 
@@ -198,6 +206,10 @@ class SignUpActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    private fun checkPassword(): Boolean {
+        return binding.signUpPassword.text!!.length < 6
     }
 
     //endregion
