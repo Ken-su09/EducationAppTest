@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
+import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : AppCompatActivity() {
@@ -30,10 +31,12 @@ class WelcomeActivity : AppCompatActivity() {
     private fun initializeUI() {
         binding.logInButton.setOnClickListener {
             startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left)
             finish()
         }
         binding.signUpButton.setOnClickListener {
             startActivity(Intent(this@WelcomeActivity, SignUpActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left)
             finish()
         }
     }

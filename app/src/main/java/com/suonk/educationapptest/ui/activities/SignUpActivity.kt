@@ -72,6 +72,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun initializeButtons() {
         binding.signUpLogInButton.setOnClickListener {
             startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         binding.signUpButton.setOnClickListener {
@@ -145,18 +146,16 @@ class SignUpActivity : AppCompatActivity() {
                 hashMap["userName"] = binding.signUpUsername.text.toString()
                 hashMap["profileImage"] = ""
 
-                databaseReference.setValue(hashMap).addOnCompleteListener(this) { it ->
+                databaseReference.setValue(hashMap).addOnCompleteListener(this) {
                     if (it.isSuccessful) {
-//                        startActivity(Intent(this, MainActivity::class.java))
-//                        finish()
+                        Toast.makeText(this, "Account created !", toastLength).show()
+                        val intent = Intent(this, LoginActivity::class.java)
+                        intent.putExtra("user_email", email)
+                        intent.putExtra("user_password", password)
+                        startActivity(intent)
+                        finish()
                     }
                 }
-                Toast.makeText(this, "Account created !", toastLength).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.putExtra("user_email", email)
-                intent.putExtra("user_password", password)
-                startActivity(intent)
-                finish()
             } else {
                 Toast.makeText(this, "Fail", toastLength).show()
             }
