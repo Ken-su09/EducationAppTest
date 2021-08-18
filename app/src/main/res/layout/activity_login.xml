@@ -117,6 +117,7 @@
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/login_checkbox_remember"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="Remember me ?"

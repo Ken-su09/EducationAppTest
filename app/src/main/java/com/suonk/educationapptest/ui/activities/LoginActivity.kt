@@ -1,6 +1,8 @@
 package com.suonk.educationapptest.ui.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +13,7 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
@@ -56,8 +59,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initializeUI() {
         initializeButtons()
-        animationPasswordIconClick()
         geUserInfoIntent()
+        animationPasswordIconClick()
+        rememberFillFields()
 
         binding.loginEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -75,22 +79,22 @@ class LoginActivity : AppCompatActivity() {
     private fun initializeButtons() {
         binding.logInButton.setOnClickListener {
             if (checkIfFieldsAreEmpty()) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Fields should not be empty",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                Toast.makeText(this, "Fields should not be empty", Toast.LENGTH_SHORT).show()
             } else {
                 if (!checkEmailValidationSignUp()) {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "The email is not valid",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    Toast.makeText(this, "The email is not valid", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (binding.loginCheckboxRemember.isChecked) {
+                        sharedPrefRememberIsChecked()
+                    } else {
+                        val sharedPrefCheckBox = getSharedPreferences("rememberCheckbox", Context.MODE_PRIVATE)
+                        val editorCheckBox: SharedPreferences.Editor = sharedPrefCheckBox.edit()
+                        editorCheckBox.putBoolean("rememberCheckbox", binding.loginCheckboxRemember.isChecked)
+                        editorCheckBox.apply()
+                    }
+
+                    userAuthentication()
                 }
-                userAuthentication()
             }
         }
 
@@ -120,7 +124,37 @@ class LoginActivity : AppCompatActivity() {
 
     //endregion
 
-    //region =========================================== Intent =============================================
+    //region ================================= Intent And SharedPreferences =================================
+
+    private fun sharedPrefRememberIsChecked() {
+        val sharedPrefCheckBox = getSharedPreferences("rememberCheckbox", Context.MODE_PRIVATE)
+        val editorCheckBox: SharedPreferences.Editor = sharedPrefCheckBox.edit()
+        editorCheckBox.putBoolean("rememberCheckbox", binding.loginCheckboxRemember.isChecked)
+        editorCheckBox.apply()
+
+        val sharedPrefEmail = getSharedPreferences("rememberEmail", Context.MODE_PRIVATE)
+        val editorEmail: SharedPreferences.Editor = sharedPrefEmail.edit()
+        editorEmail.putString("rememberEmail", binding.loginEmail.text.toString())
+        editorEmail.apply()
+
+        val sharedPrefPassword = getSharedPreferences("rememberPassword", Context.MODE_PRIVATE)
+        val editorPassword: SharedPreferences.Editor = sharedPrefPassword.edit()
+        editorPassword.putString("rememberPassword", binding.loginPassword.text.toString())
+        editorPassword.apply()
+    }
+
+    private fun rememberFillFields() {
+        val sharedPrefCheckBox = getSharedPreferences("rememberCheckbox", Context.MODE_PRIVATE)
+        val sharedPrefEmail = getSharedPreferences("rememberEmail", Context.MODE_PRIVATE)
+        val sharedPrefPassword = getSharedPreferences("rememberPassword", Context.MODE_PRIVATE)
+
+        if (sharedPrefCheckBox.getBoolean("rememberCheckbox", false)) {
+            binding.loginCheckboxRemember.isChecked = true
+            binding.loginEmail.setText(sharedPrefEmail.getString("rememberEmail", "")!!)
+            Log.i("rememberEmail", sharedPrefEmail.getString("rememberEmail", "")!!)
+            binding.loginPassword.setText(sharedPrefPassword.getString("rememberPassword", ""))
+        }
+    }
 
     private fun geUserInfoIntent() {
         if (intent != null) {
