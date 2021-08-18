@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@drawable/ic_dashboard"
+            android:title="Dashboard" />
+    </group>
+
+    <item android:title="Mes études">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/schedule"
+                    android:icon="@drawable/ic_schedule"
+                    android:title="Import" />
+                <item
+                    android:id="@+id/school_notes"
+                    android:icon="@drawable/ic_exam"
+                    android:title="Notes" />
+                <item
+                    android:id="@+id/school_messaging"
+                    android:icon="@drawable/ic_messaging"
+                    android:title="Messagerie" />
+                <item
+                    android:id="@+id/school_absences"
+                    android:icon="@drawable/ic_absences"
+                    android:title="Absences" />
+                <item
+                    android:id="@+id/school_folder"
+                    android:icon="@drawable/ic_folder"
+                    android:title="Folders" />
+                <item
+                    android:id="@+id/school_student_card"
+                    android:icon="@drawable/ic_student_card"
+                    android:title="Carte étudiante" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="Paramètres" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Déconnexion" />
+            </group>
+        </menu>
+    </item>
+</menu>

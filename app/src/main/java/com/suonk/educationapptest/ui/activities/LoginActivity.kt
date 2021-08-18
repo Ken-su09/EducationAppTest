@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+
         initializeUI()
     }
 
@@ -108,9 +109,6 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                val user: FirebaseUser? = auth.currentUser
-                val userId: String = user!!.uid
-
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
