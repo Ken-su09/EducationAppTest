@@ -100,6 +100,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding.signUpButton.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+//            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right)
         }
     }
 
