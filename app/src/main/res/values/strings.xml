@@ -2,4 +2,6 @@
     <string name="app_name">EducationAppTest</string>
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
+    <string name="alert_dialog_yes">Oui</string>
+    <string name="alert_dialog_no">Non</string>
 </resources>

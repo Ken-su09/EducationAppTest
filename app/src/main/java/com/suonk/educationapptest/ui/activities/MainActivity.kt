@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -86,8 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_settings -> {
             }
             R.id.nav_logout -> {
-                auth.signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
+                alertDialog()
             }
         }
         return true
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun initializeRecyclerView() {
         binding.todayClassesRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.todayClassesRecyclerView.adapter = ClassAdapter(createListOfSchoolClass())
+        binding.todayClassesRecyclerView.adapter = ClassAdapter(createListOfSchoolClass(), this)
     }
 
     private fun createListOfSchoolClass(): MutableList<SchoolClass> {
@@ -149,6 +149,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //endregion
 
     //region =========================================== Firebase ===========================================
+
+
+    //endregion
+
+    //region ========================================= AlertDialog ==========================================
+
+    private fun alertDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Déconnexion")
+            .setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
+            .setPositiveButton(resources.getString(R.string.alert_dialog_yes)) { dialog, which ->
+                auth.signOut()
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+            .setNegativeButton(resources.getString(R.string.alert_dialog_no)) { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
+    }
 
 
     //endregion
