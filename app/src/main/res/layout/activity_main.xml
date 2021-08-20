@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColorDark">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,7 +25,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="Today's class"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -37,7 +38,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/today_classes__title"
-            tools:listitem="@layout/item_classe" />
+            tools:listitem="@layout/item_class" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

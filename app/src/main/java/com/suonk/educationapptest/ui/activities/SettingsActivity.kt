@@ -14,7 +14,7 @@ import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivitySettingsBinding
 import com.suonk.educationapptest.databinding.ActivityStudentCardBinding
 
-class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class SettingsActivity : AppCompatActivity() {
 
     //region =========================================== Example ============================================
 
@@ -24,7 +24,6 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     // View
     private lateinit var binding: ActivitySettingsBinding
-    private lateinit var drawer: DrawerLayout
 
     // Firebase
     private lateinit var auth: FirebaseAuth
@@ -43,88 +42,34 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     //region ========================================== Override ===========================================
 
-    override fun onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.dashboard -> {
-                startActivity(Intent(this@SettingsActivity, MainActivity::class.java))
-            }
-            R.id.schedule -> {
-            }
-            R.id.school_notes -> {
-            }
-            R.id.school_messaging -> {
-            }
-            R.id.school_folder -> {
-            }
-            R.id.school_absences -> {
-            }
-            R.id.school_student_card -> {
-                startActivity(Intent(this@SettingsActivity, StudentCardActivity::class.java))
-            }
-            R.id.nav_settings -> {
-            }
-            R.id.nav_logout -> {
-                alertDialog()
-            }
-        }
-        return true
-    }
-
     //endregion
 
     //region ========================================== Initialize ==========================================
 
     private fun initializeUI() {
         initializeDrawerToolbarAndNavigation()
+        darkModeSwitch()
     }
 
     private fun initializeDrawerToolbarAndNavigation() {
-        drawer = binding.drawerLayout
-
         // Toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        // Navigation View and Drawer
-        binding.navView.bringToFront()
-        val toggle = ActionBarDrawerToggle(
-            this, drawer, binding.toolbar, R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
-        binding.navView.setNavigationItemSelectedListener(this)
-        binding.navView.menu.getItem(2).isChecked = true
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
-    //endregion
-
-    //region =========================================== Firebase ===========================================
-
-    //endregion
-
-    //region ========================================= AlertDialog ==========================================
-
-    private fun alertDialog() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Déconnexion")
-            .setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
-            .setPositiveButton(resources.getString(R.string.alert_dialog_yes)) { dialog, which ->
-                auth.signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
+    private fun darkModeSwitch() {
+        binding.darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.darkModeOnOff.text = "On"
+            } else {
+                binding.darkModeOnOff.text = "Off"
             }
-            .setNegativeButton(resources.getString(R.string.alert_dialog_no)) { dialog, which ->
-                dialog.dismiss()
-            }
-            .show()
+        }
     }
 
     //endregion

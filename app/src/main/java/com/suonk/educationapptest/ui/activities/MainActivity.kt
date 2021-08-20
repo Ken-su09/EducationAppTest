@@ -15,7 +15,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.suonk.educationapptest.R
-import com.suonk.educationapptest.databinding.ActivityLoginBinding
 import com.suonk.educationapptest.databinding.ActivityMainBinding
 import com.suonk.educationapptest.model.SchoolClass
 import com.suonk.educationapptest.ui.adapters.ClassAdapter
@@ -84,8 +83,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.school_student_card -> {
                 startActivity(Intent(this@MainActivity, StudentCardActivity::class.java))
+                drawer.closeDrawer(GravityCompat.START)
             }
             R.id.nav_settings -> {
+                startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+                drawer.closeDrawer(GravityCompat.START)
             }
             R.id.nav_logout -> {
                 alertDialog()

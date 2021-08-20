@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.suonk.educationapptest.R
-import com.suonk.educationapptest.databinding.ItemClasseBinding
+import com.suonk.educationapptest.databinding.ItemClassBinding
 import com.suonk.educationapptest.model.SchoolClass
 
 class ClassAdapter(
@@ -15,10 +15,10 @@ class ClassAdapter(
 ) :
     RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
 
-    private lateinit var binding: ItemClasseBinding
+    private lateinit var binding: ItemClassBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
-        binding = ItemClasseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemClassBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ClassViewHolder(binding, activity)
     }
 
@@ -32,7 +32,7 @@ class ClassAdapter(
     }
 
     class ClassViewHolder(
-        private var itemClassBinding: ItemClasseBinding,
+        private var itemClassBinding: ItemClassBinding,
         private var activity: Activity
     ) :
         RecyclerView.ViewHolder(itemClassBinding.root) {

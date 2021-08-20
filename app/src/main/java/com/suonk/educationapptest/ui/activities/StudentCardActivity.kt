@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityStudentCardBinding
 
-class StudentCardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class StudentCardActivity : AppCompatActivity() {
 
     //region =========================================== Example ============================================
 
@@ -23,7 +23,6 @@ class StudentCardActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     // View
     private lateinit var binding: ActivityStudentCardBinding
-    private lateinit var drawer: DrawerLayout
 
     // Firebase
     private lateinit var auth: FirebaseAuth
@@ -42,40 +41,6 @@ class StudentCardActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     //region ========================================== Override ===========================================
 
-    override fun onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.dashboard -> {
-                startActivity(Intent(this@StudentCardActivity, MainActivity::class.java))
-            }
-            R.id.schedule -> {
-            }
-            R.id.school_notes -> {
-            }
-            R.id.school_messaging -> {
-            }
-            R.id.school_folder -> {
-            }
-            R.id.school_absences -> {
-            }
-            R.id.school_student_card -> {
-            }
-            R.id.nav_settings -> {
-            }
-            R.id.nav_logout -> {
-                alertDialog()
-            }
-        }
-        return true
-    }
-
     //endregion
 
     //region ========================================== Initialize ==========================================
@@ -85,22 +50,14 @@ class StudentCardActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     private fun initializeDrawerToolbarAndNavigation() {
-        drawer = binding.drawerLayout
-
         // Toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        // Navigation View and Drawer
-        binding.navView.bringToFront()
-        val toggle = ActionBarDrawerToggle(
-            this, drawer, binding.toolbar, R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
-        binding.navView.setNavigationItemSelectedListener(this)
-        binding.navView.menu.getItem(2).isChecked = true
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     //endregion
