@@ -58,7 +58,7 @@
             android:layout_toEndOf="@+id/user_profile_image"
             android:text="Professeur d'Education Civique"
             android:textColor="@color/app_color"
-            android:textSize="16sp" />
+            android:textSize="17sp" />
 
         <View
             android:id="@+id/view_empty"

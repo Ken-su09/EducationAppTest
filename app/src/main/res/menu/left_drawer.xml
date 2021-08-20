@@ -29,7 +29,7 @@
                     android:title="Absences" />
                 <item
                     android:id="@+id/school_folder"
-                    android:icon="@drawable/ic_folder"
+                    android:icon="@drawable/ic_folders"
                     android:title="Folders" />
                 <item
                     android:id="@+id/school_student_card"

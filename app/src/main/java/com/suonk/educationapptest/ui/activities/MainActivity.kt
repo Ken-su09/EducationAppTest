@@ -1,25 +1,28 @@
 package com.suonk.educationapptest.ui.activities
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityMainBinding
+import com.suonk.educationapptest.model.NavigationItemModel
 import com.suonk.educationapptest.model.SchoolClass
 import com.suonk.educationapptest.ui.adapters.ClassAdapter
+import com.suonk.educationapptest.ui.adapters.NavigationRecyclerViewAdapter
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     //region =========================================== Example ============================================
 
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // View
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawer: DrawerLayout
+    private lateinit var adapter: NavigationRecyclerViewAdapter
 
     // Firebase
     private lateinit var auth: FirebaseAuth
@@ -67,42 +71,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.dashboard -> {
-            }
-            R.id.schedule -> {
-            }
-            R.id.school_notes -> {
-            }
-            R.id.school_messaging -> {
-            }
-            R.id.school_folder -> {
-            }
-            R.id.school_absences -> {
-            }
-            R.id.school_student_card -> {
-                startActivity(Intent(this@MainActivity, StudentCardActivity::class.java))
-                drawer.closeDrawer(GravityCompat.START)
-            }
-            R.id.nav_settings -> {
-                startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
-                drawer.closeDrawer(GravityCompat.START)
-            }
-            R.id.nav_logout -> {
-                alertDialog()
-            }
-        }
-        return true
-    }
-
     //endregion
 
     //region ========================================= InitializeUI =========================================
 
     private fun initializeUI() {
         initializeDrawerToolbarAndNavigation()
-        initializeRecyclerView()
+        initializeHorizontalRecyclerView()
+        updateAdapter(0)
     }
 
     private fun initializeDrawerToolbarAndNavigation() {
@@ -112,19 +88,40 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        // Navigation View and Drawer
-        binding.navView.bringToFront()
-        val toggle = ActionBarDrawerToggle(
+        val toggle = object : ActionBarDrawerToggle(
             this, drawer, binding.toolbar, R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
-        )
+        ) {
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                try {
+                    val inputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+                } catch (e: Exception) {
+                    e.stackTrace
+                }
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                try {
+                    val inputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+                } catch (e: Exception) {
+                    e.stackTrace
+                }
+            }
+        }
+
         drawer.addDrawerListener(toggle)
         toggle.syncState()
-        binding.navView.setNavigationItemSelectedListener(this)
-        binding.navView.menu.getItem(0).isChecked = true
+
+        initializeNavigationRecyclerView()
     }
 
-    private fun initializeRecyclerView() {
+    private fun initializeHorizontalRecyclerView() {
         binding.todayClassesRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.todayClassesRecyclerView.adapter = ClassAdapter(createListOfSchoolClass(), this)
@@ -146,6 +143,53 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         listOfSchoolClass.add(schoolClass4)
 
         return listOfSchoolClass
+    }
+
+    private fun initializeNavigationRecyclerView() {
+        binding.navViewRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.navViewRecyclerView.setHasFixedSize(true)
+
+        binding.navViewRecyclerView.addOnItemTouchListener(
+            RecyclerTouchListener(
+                this,
+                object : ClickListener {
+                    override fun onClick(view: View, position: Int) {
+                        when (position) {
+                            0 -> {
+                            }
+                            1 -> {
+                            }
+                            2 -> {
+                            }
+                            3 -> {
+                            }
+                            4 -> {
+                            }
+                            5 -> {
+                            }
+                            6 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
+                            7 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
+                            8 -> alertDialog()
+                        }
+                        updateAdapter(position)
+                    }
+                })
+        )
+    }
+
+    private fun createListOfNavItems(): MutableList<NavigationItemModel> {
+        return mutableListOf(
+            NavigationItemModel(R.drawable.ic_my_dashboard, getString(R.string.dashboard)),
+            NavigationItemModel(R.drawable.ic_schedule, getString(R.string.schedule)),
+            NavigationItemModel(R.drawable.ic_messaging, getString(R.string.messaging)),
+            NavigationItemModel(R.drawable.ic_nav_notifications, getString(R.string.notifications)),
+            NavigationItemModel(R.drawable.ic_absences, getString(R.string.non_attendance)),
+            NavigationItemModel(R.drawable.ic_folders, getString(R.string.folders)),
+            NavigationItemModel(R.drawable.ic_student_card, getString(R.string.student_card)),
+            NavigationItemModel(R.drawable.ic_settings, getString(R.string.settings)),
+            NavigationItemModel(R.drawable.ic_logout, getString(R.string.logout))
+        )
     }
 
     //endregion
@@ -173,6 +217,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     //endregion
+
+    private fun changeActivity(cls: Class<Activity>) {
+        startActivity(Intent(this@MainActivity, cls))
+        drawer.closeDrawer(GravityCompat.START)
+    }
+
+    private fun updateAdapter(currentPosition: Int) {
+        adapter = NavigationRecyclerViewAdapter(createListOfNavItems(), currentPosition, this)
+        binding.navViewRecyclerView.adapter = adapter
+    }
 
     //endregion
 }

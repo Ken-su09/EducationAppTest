@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">EducationAppTest</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="alert_dialog_yes">Yes</string>
+    <string name="alert_dialog_no">No</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+
+    // Items Navigation
+    <string name="dashboard">Dashboard</string>
+    <string name="schedule">Emploi du temps</string>
+    <string name="messaging">Messagerie</string>
+    <string name="notifications">Notifications</string>
+    <string name="non_attendance">Absences</string>
+    <string name="folders">Documents</string>
+    <string name="student_card">Carte étudiante</string>
+    <string name="settings">Paramètres</string>
+    <string name="logout">Déconnexion</string>
+</resources>
