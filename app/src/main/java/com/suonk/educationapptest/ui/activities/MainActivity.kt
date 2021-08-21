@@ -21,8 +21,10 @@ import com.suonk.educationapptest.model.NavigationItemModel
 import com.suonk.educationapptest.model.SchoolClass
 import com.suonk.educationapptest.ui.adapters.ClassAdapter
 import com.suonk.educationapptest.ui.adapters.NavigationRecyclerViewAdapter
+import com.suonk.educationapptest.utils.ClickListener
+import com.suonk.educationapptest.utils.RecyclerTouchListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     //region =========================================== Example ============================================
 
@@ -68,6 +70,29 @@ class MainActivity : AppCompatActivity() {
             drawer.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        if (v?.tag != null) {
+            when (v.tag as Int) {
+                0 -> {
+                }
+                1 -> {
+                }
+                2 -> {
+                }
+                3 -> {
+                }
+                4 -> {
+                }
+                5 -> {
+                }
+                6 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
+                7 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
+                8 -> alertDialog()
+            }
+            updateAdapter(v.tag as Int)
         }
     }
 
@@ -150,32 +175,32 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.navViewRecyclerView.setHasFixedSize(true)
 
-        binding.navViewRecyclerView.addOnItemTouchListener(
-            RecyclerTouchListener(
-                this,
-                object : ClickListener {
-                    override fun onClick(view: View, position: Int) {
-                        when (position) {
-                            0 -> {
-                            }
-                            1 -> {
-                            }
-                            2 -> {
-                            }
-                            3 -> {
-                            }
-                            4 -> {
-                            }
-                            5 -> {
-                            }
-                            6 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
-                            7 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
-                            8 -> alertDialog()
-                        }
-                        updateAdapter(position)
-                    }
-                })
-        )
+//        binding.navViewRecyclerView.addOnItemTouchListener(
+//            RecyclerTouchListener(
+//                this,
+//                object : ClickListener {
+//                    override fun onClick(view: View, position: Int) {
+//                        when (position) {
+//                            0 -> {
+//                            }
+//                            1 -> {
+//                            }
+//                            2 -> {
+//                            }
+//                            3 -> {
+//                            }
+//                            4 -> {
+//                            }
+//                            5 -> {
+//                            }
+//                            6 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
+//                            7 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
+//                            8 -> alertDialog()
+//                        }
+//                        updateAdapter(position)
+//                    }
+//                })
+//        )
     }
 
     private fun createListOfNavItems(): MutableList<NavigationItemModel> {
@@ -224,7 +249,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateAdapter(currentPosition: Int) {
-        adapter = NavigationRecyclerViewAdapter(createListOfNavItems(), currentPosition, this)
+        adapter = NavigationRecyclerViewAdapter(createListOfNavItems(), currentPosition, this, this)
         binding.navViewRecyclerView.adapter = adapter
     }
 

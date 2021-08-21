@@ -13,7 +13,9 @@ import com.suonk.educationapptest.model.NavigationItemModel
 
 class NavigationRecyclerViewAdapter(
     private var items: MutableList<NavigationItemModel>,
-    private var currentPos: Int, private var activity: Activity
+    private var currentPos: Int,
+    private var activity: Activity,
+    private var onClickListener: View.OnClickListener
 ) : RecyclerView.Adapter<NavigationRecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemNavigationBinding
@@ -29,10 +31,14 @@ class NavigationRecyclerViewAdapter(
         holder.onBind(navigationItemModel)
 
         if (currentPos == position) {
-            binding.navItemLayout.background = holder.getDraw(R.color.backgroundColorDark)
+            binding.navItemLayout.background =
+                holder.getDraw(R.color.backgroundColorDarkTransparent)
         } else {
             binding.navItemLayout.background = holder.getDraw(R.color.transparent)
         }
+
+        binding.navItemLayout.tag = position
+        binding.navItemLayout.setOnClickListener(onClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -49,17 +55,37 @@ class NavigationRecyclerViewAdapter(
             return AppCompatResources.getDrawable(activity, resources)
         }
 
-        private fun checkTitleContent(title: String): Boolean {
-            return title == "Notifications" || title == "Messagerie"
+        private fun checkIfTitleIsNotifications(title: String): Boolean {
+            return title == activity.getString(R.string.notifications) || title == activity.getString(
+                R.string.messaging
+            )
+        }
+
+        private fun checkIfTitleNeedDivider(title: String): Boolean {
+            if (title == activity.getString(R.string.schedule)) {
+                itemNavigationBinding.dividerTitle.text = activity.getString(R.string.studies)
+                return true
+            } else if (title == activity.getString(R.string.settings)) {
+                itemNavigationBinding.dividerTitle.text = activity.getString(R.string.other)
+                return true
+            } else {
+                return false
+            }
         }
 
         fun onBind(navigationItemModel: NavigationItemModel) {
             itemNavigationBinding.navIcon.setImageDrawable(getDraw(navigationItemModel.icon))
-            itemNavigationBinding.navNotifText.text = navigationItemModel.title
+            itemNavigationBinding.navTitle.text = navigationItemModel.title
+            itemNavigationBinding.navNotifText.text = "1"
 
-            if (checkTitleContent(navigationItemModel.title)) {
+            if (checkIfTitleIsNotifications(navigationItemModel.title)) {
                 itemNavigationBinding.navNotificationLayout.visibility = View.VISIBLE
             }
+
+            if (checkIfTitleNeedDivider(navigationItemModel.title)) {
+                itemNavigationBinding.dividerLayout.visibility = View.VISIBLE
+            }
+
         }
     }
 }

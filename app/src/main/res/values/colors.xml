@@ -15,4 +15,5 @@
 
     <color name="backgroundColor">#d4e2db</color>
     <color name="backgroundColorDark">#2f2a54</color>
+    <color name="backgroundColorDarkTransparent">#662f2a54</color>
 </resources>

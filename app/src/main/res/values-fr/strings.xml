@@ -17,4 +17,6 @@
     <string name="student_card">Carte étudiante</string>
     <string name="settings">Paramètres</string>
     <string name="logout">Déconnexion</string>
+    <string name="studies">Mes Études</string>
+    <string name="other">Autres</string>
 </resources>

@@ -3,60 +3,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/nav_item_layout"
     android:background="@color/transparent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/nav_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_student_card" />
-
-    <TextView
-        android:id="@+id/nav_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="Student Card"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_icon"
-        app:layout_constraintStart_toEndOf="@+id/nav_icon"
-        app:layout_constraintTop_toTopOf="@+id/nav_icon" />
-
     <RelativeLayout
-        android:id="@+id/nav_notification_layout"
-        android:layout_width="wrap_content"
+        android:id="@+id/divider_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nav_title">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/nav_notification_icon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@color/app_color"
-            android:layout_centerInParent="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey" />
 
         <TextView
-            android:id="@+id/nav_notif_text"
+            android:id="@+id/divider_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="2"
-            android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Mes études"
+            android:textColor="#04baf3"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nav_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@+id/divider_layout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/nav_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_student_card" />
+
+        <TextView
+            android:id="@+id/nav_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Student Card"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/nav_icon"
+            app:layout_constraintStart_toEndOf="@+id/nav_icon"
+            app:layout_constraintTop_toTopOf="@+id/nav_icon" />
+
+        <RelativeLayout
+            android:id="@+id/nav_notification_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/nav_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nav_title">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nav_notification_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:src="@color/app_color" />
+
+            <TextView
+                android:id="@+id/nav_notif_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="2"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.suonk.educationapptest.ui.activities
+package com.suonk.educationapptest.utils
 
 import android.content.Context
 import android.view.GestureDetector
