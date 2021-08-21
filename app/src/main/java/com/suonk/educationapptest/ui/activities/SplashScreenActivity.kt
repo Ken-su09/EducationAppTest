@@ -19,7 +19,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initializeUI()
-        delayedToMainActivity()
+        delayedToWelcomeActivity()
     }
 
     private fun initializeUI() {
@@ -27,7 +27,7 @@ class SplashScreenActivity : AppCompatActivity() {
         binding.appLogo.startAnimation(animation)
     }
 
-    private fun delayedToMainActivity() {
+    private fun delayedToWelcomeActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@SplashScreenActivity, WelcomeActivity::class.java))
             finish()

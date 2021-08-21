@@ -206,6 +206,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun createListOfNavItems(): MutableList<NavigationItemModel> {
         return mutableListOf(
             NavigationItemModel(R.drawable.ic_my_dashboard, getString(R.string.dashboard)),
+            NavigationItemModel(R.drawable.ic_exams, getString(R.string.notes)),
             NavigationItemModel(R.drawable.ic_schedule, getString(R.string.schedule)),
             NavigationItemModel(R.drawable.ic_messaging, getString(R.string.messaging)),
             NavigationItemModel(R.drawable.ic_nav_notifications, getString(R.string.notifications)),

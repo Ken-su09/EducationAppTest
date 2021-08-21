@@ -10,6 +10,7 @@
 
     // Items Navigation
     <string name="dashboard">Dashboard</string>
+    <string name="notes">Mes Notes</string>
     <string name="schedule">Emploi du temps</string>
     <string name="messaging">Messagerie</string>
     <string name="notifications">Notifications</string>
@@ -20,4 +21,6 @@
     <string name="logout">Déconnexion</string>
     <string name="studies">Mes Études</string>
     <string name="other">Autres</string>
+    <string name="welcome_new_student_content">Si oui, vous avez dû recevoir un mail avec vos informations, vous permettant ainsi de vous connecter et d\'accèder à toutes les informations académiques et autres.</string>
+    <string name="welcome_new_student_title">Vous êtes un nouvel étudiant ?</string>
 </resources>
