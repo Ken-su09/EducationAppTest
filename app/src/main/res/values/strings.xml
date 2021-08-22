@@ -23,4 +23,5 @@
     <string name="other">Other</string>
     <string name="welcome_new_student_content">If so, you should have received an email with your information, allowing you to log in and access all academic and other information.</string>
     <string name="welcome_new_student_title">New Student ?</string>
+    <string name="view_profile">View Profile</string>
 </resources>
