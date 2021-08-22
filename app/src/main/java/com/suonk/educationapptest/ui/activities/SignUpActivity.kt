@@ -15,8 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivitySignUpBinding
 import java.util.regex.Pattern
@@ -33,7 +31,6 @@ class SignUpActivity : AppCompatActivity() {
 
     //Firebase
     private lateinit var auth: FirebaseAuth
-    private lateinit var databaseReference: DatabaseReference
 
     private val toastLength = Toast.LENGTH_SHORT
 
@@ -89,7 +86,6 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    registerUser()
                 }
             }
         }
@@ -128,39 +124,6 @@ class SignUpActivity : AppCompatActivity() {
     //endregion
 
     //region =========================================== Firebase ===========================================
-
-    private fun registerUser() {
-        val email = binding.signUpEmail.text.toString()
-        val password = binding.signUpPassword.text.toString()
-
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                val user: FirebaseUser? = auth.currentUser
-                val userId: String = user!!.uid
-
-                databaseReference =
-                    FirebaseDatabase.getInstance().getReference("Users").child(userId)
-
-                val hashMap: HashMap<String, String> = HashMap()
-                hashMap["userId"] = userId
-                hashMap["userName"] = binding.signUpUsername.text.toString()
-                hashMap["profileImage"] = ""
-
-                databaseReference.setValue(hashMap).addOnCompleteListener(this) {
-                    if (it.isSuccessful) {
-                        Toast.makeText(this, "Account created !", toastLength).show()
-                        val intent = Intent(this, LoginActivity::class.java)
-                        intent.putExtra("user_email", email)
-                        intent.putExtra("user_password", password)
-                        startActivity(intent)
-                        finish()
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Fail", toastLength).show()
-            }
-        }
-    }
 
     //endregion
 

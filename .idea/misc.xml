@@ -19,6 +19,7 @@
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_custom_button_square.xml" value="0.24864864864864866" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_email.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_email_blue.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_epita_app_logo.xml" value="0.24864864864864866" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_exams.xml" value="0.24864864864864866" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_invisible1.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_invisible2.xml" value="0.38333333333333336" />
@@ -37,12 +38,13 @@
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_password_visible.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_sign_background.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/ic_user.xml" value="0.3380208333333333" />
-        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_login.xml" value="0.17" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_splash_screen.xml" value="0.12" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_student_card.xml" value="0.22" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_student_profile.xml" value="0.33" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_welcome.xml" value="0.2" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/item_classe.xml" value="0.5" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/item_navigation.xml" value="0.33" />

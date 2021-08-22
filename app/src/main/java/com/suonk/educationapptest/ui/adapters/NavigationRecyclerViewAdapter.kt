@@ -14,8 +14,7 @@ import com.suonk.educationapptest.model.NavigationItemModel
 class NavigationRecyclerViewAdapter(
     private var items: MutableList<NavigationItemModel>,
     private var currentPos: Int,
-    private var activity: Activity,
-    private var onClickListener: View.OnClickListener
+    private var activity: Activity
 ) : RecyclerView.Adapter<NavigationRecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemNavigationBinding
@@ -38,7 +37,7 @@ class NavigationRecyclerViewAdapter(
         }
 
         binding.navItemLayout.tag = position
-        binding.navItemLayout.setOnClickListener(onClickListener)
+        binding.navItemLayout.setOnClickListener(activity as View.OnClickListener)
     }
 
     override fun getItemCount(): Int {
