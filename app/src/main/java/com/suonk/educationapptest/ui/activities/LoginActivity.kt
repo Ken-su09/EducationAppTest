@@ -18,9 +18,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityLoginBinding
 import java.util.regex.Pattern
@@ -37,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
 
     //Firebase
     private lateinit var auth: FirebaseAuth
-    private lateinit var databaseReference: DatabaseReference
 
     private val toastLength = Toast.LENGTH_SHORT
 
@@ -96,12 +92,6 @@ class LoginActivity : AppCompatActivity() {
                     userAuthentication()
                 }
             }
-        }
-
-        binding.signUpButton.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
-//            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right)
         }
     }
 
