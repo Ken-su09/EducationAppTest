@@ -71,8 +71,8 @@ class StudentProfileActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 2 -> {
                 }
-                3 -> {
-                }
+
+                3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
                 4 -> {
                 }
                 5 -> {
@@ -99,7 +99,8 @@ class StudentProfileActivity : AppCompatActivity(), View.OnClickListener {
             drawer,
             toolbar,
             this,
-            binding.navViewRecyclerView
+            binding.navViewRecyclerView,
+            0
         )
     }
 

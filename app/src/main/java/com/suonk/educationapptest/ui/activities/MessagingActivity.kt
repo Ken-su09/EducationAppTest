@@ -2,10 +2,9 @@ package com.suonk.educationapptest.ui.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -13,22 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityMainBinding
+import com.suonk.educationapptest.databinding.ActivityMessagingBinding
 import com.suonk.educationapptest.model.SchoolClass
 import com.suonk.educationapptest.ui.adapters.ClassAdapter
+import com.suonk.educationapptest.utils.FunctionsUtils
 import com.suonk.educationapptest.utils.FunctionsUtils.initializeDrawerToolbarAndNavigation
-import com.suonk.educationapptest.utils.FunctionsUtils.updateAdapter
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MessagingActivity : AppCompatActivity(), View.OnClickListener {
 
     //region ========================================== Val or Var ==========================================
 
     // View
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMessagingBinding
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
 
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMessagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initFirebase()
@@ -59,13 +58,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v?.tag != null) {
             when (v.tag as Int) {
-                0 -> {
-                }
+                0 -> changeActivity(MainActivity::class.java as Class<Activity>)
                 1 -> {
                 }
                 2 -> {
                 }
-                3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
+                3 -> {
+                }
                 4 -> {
                 }
                 5 -> {
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 8 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
                 9 -> alertDialog()
             }
-            updateAdapter(v.tag as Int, this)
+            FunctionsUtils.updateAdapter(v.tag as Int, this)
         }
     }
 
@@ -88,36 +87,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer = binding.drawerLayout
         toolbar = binding.toolbar
 
-        initializeDrawerToolbarAndNavigation(drawer, toolbar, this, binding.navViewRecyclerView, 0)
-        initializeHorizontalRecyclerView()
+        initializeDrawerToolbarAndNavigation(
+            drawer,
+            toolbar,
+            this,
+            binding.navViewRecyclerView,
+            3
+        )
 
         binding.userViewProfile.setOnClickListener {
             changeActivity(StudentProfileActivity::class.java as Class<Activity>)
         }
-    }
-
-    private fun initializeHorizontalRecyclerView() {
-        binding.todayClassesRecyclerView.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.todayClassesRecyclerView.adapter = ClassAdapter(createListOfSchoolClass(), this)
-    }
-
-    private fun createListOfSchoolClass(): MutableList<SchoolClass> {
-        val listOfSchoolClass = mutableListOf<SchoolClass>()
-
-        val schoolClass1 = SchoolClass("Maths", "", "8h - 10h", "3C", "Mr Barré", 1)
-        val schoolClass2 = SchoolClass("Education Civique", "", "10h - 11h", "3C", "Mr Onizuka", 2)
-        val schoolClass3 = SchoolClass("Japonais", "", "11h - 12h", "5B", "Mlle Fuyutsuki", 3)
-        val schoolClass4 = SchoolClass("Sous directeur", "", "8h - 10h", "3C", "Mr Uchiyamada", 4)
-//        val schoolClass5 = SchoolClass("Maths", "", "8h - 10h", "3C", "Mr Onizuka", 5)
-//        val schoolClass6 = SchoolClass("Maths", "", "8h - 10h", "3C", "Mr Onizuka", 6)
-
-        listOfSchoolClass.add(schoolClass1)
-        listOfSchoolClass.add(schoolClass2)
-        listOfSchoolClass.add(schoolClass3)
-        listOfSchoolClass.add(schoolClass4)
-
-        return listOfSchoolClass
     }
 
     //endregion
@@ -174,7 +154,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun changeActivity(cls: Class<Activity>) {
-        startActivity(Intent(this@MainActivity, cls))
+        startActivity(Intent(this@MessagingActivity, cls))
         drawer.closeDrawer(GravityCompat.START)
     }
 

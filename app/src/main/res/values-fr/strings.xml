@@ -24,4 +24,7 @@
     <string name="welcome_new_student_content">Si oui, vous avez dû recevoir un mail avec vos informations, vous permettant ainsi de vous connecter et d\'accèder à toutes les informations académiques et autres.</string>
     <string name="welcome_new_student_title">Vous êtes un nouvel étudiant ?</string>
     <string name="view_profile">Accèder au profil</string>
+    <string name="messaging_edit_text_hint">Rechercher</string>
+    <string name="online">En ligne</string>
+    <string name="messages">Messages</string>
 </resources>

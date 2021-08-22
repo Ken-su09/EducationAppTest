@@ -50,7 +50,7 @@ object FunctionsUtils {
 
     fun initializeDrawerToolbarAndNavigation(
         drawerLayout: DrawerLayout, toolbar: Toolbar,
-        activity: AppCompatActivity, recyclerView: RecyclerView
+        activity: AppCompatActivity, recyclerView: RecyclerView, position: Int
     ) {
         // Toolbar
         activity.setSupportActionBar(toolbar)
@@ -95,7 +95,7 @@ object FunctionsUtils {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
-            adapter = updateAdapter(0, activity)
+            adapter = updateAdapter(position, activity)
         }
     }
 

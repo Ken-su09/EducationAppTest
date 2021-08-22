@@ -89,10 +89,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_terms_and_conditions"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/ic_terms_and_conditions" />
 
         <TextView
             android:id="@+id/terms_and_conditions_title"
@@ -115,9 +112,6 @@
             android:layout_centerVertical="true"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/custom_background_rounded_button" />
 
     </RelativeLayout>
