@@ -46,7 +46,6 @@ class WelcomeActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.toolbar_login -> {
                 startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
-                finish()
             }
         }
         return super.onOptionsItemSelected(item)

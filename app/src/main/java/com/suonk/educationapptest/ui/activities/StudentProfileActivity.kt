@@ -156,6 +156,7 @@ class StudentProfileActivity : AppCompatActivity(), View.OnClickListener {
             .setPositiveButton(resources.getString(R.string.alert_dialog_yes)) { dialog, which ->
                 auth.signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
             .setNegativeButton(resources.getString(R.string.alert_dialog_no)) { dialog, which ->
                 dialog.dismiss()

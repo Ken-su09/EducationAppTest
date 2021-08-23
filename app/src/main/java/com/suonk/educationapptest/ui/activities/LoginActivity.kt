@@ -83,9 +83,13 @@ class LoginActivity : AppCompatActivity() {
                     if (binding.loginCheckboxRemember.isChecked) {
                         sharedPrefRememberIsChecked()
                     } else {
-                        val sharedPrefCheckBox = getSharedPreferences("rememberCheckbox", Context.MODE_PRIVATE)
+                        val sharedPrefCheckBox =
+                            getSharedPreferences("rememberCheckbox", Context.MODE_PRIVATE)
                         val editorCheckBox: SharedPreferences.Editor = sharedPrefCheckBox.edit()
-                        editorCheckBox.putBoolean("rememberCheckbox", binding.loginCheckboxRemember.isChecked)
+                        editorCheckBox.putBoolean(
+                            "rememberCheckbox",
+                            binding.loginCheckboxRemember.isChecked
+                        )
                         editorCheckBox.apply()
                     }
 
@@ -109,7 +113,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "Fail", toastLength).show()
+                Toast.makeText(this, "Un des champs est incorrect", toastLength).show()
             }
         }
     }

@@ -27,4 +27,5 @@
     <string name="messaging_edit_text_hint">Rechercher</string>
     <string name="online">En ligne</string>
     <string name="messages">Messages</string>
+    <string name="today_class_title">Cours d\'aujourd\'hui</string>
 </resources>
