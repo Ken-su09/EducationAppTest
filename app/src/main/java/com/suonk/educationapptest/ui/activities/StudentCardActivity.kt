@@ -66,7 +66,7 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 6 -> {
                 }
-                7 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
+                7 -> {}
                 8 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
                 9 -> alertDialog()
             }
