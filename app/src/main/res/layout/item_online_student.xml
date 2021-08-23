@@ -5,8 +5,12 @@
     android:id="@+id/item_online_student_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:background="@color/transparent">
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/pressed_item_animation"
+    android:clickable="true"
+    android:focusable="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/item_online_student_image"
@@ -24,6 +28,7 @@
         android:layout_below="@+id/item_online_student_image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
         android:text="Eikichi"
         android:textColor="@color/white"
         android:textSize="16sp"

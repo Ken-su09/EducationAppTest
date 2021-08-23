@@ -13,6 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EducationAppTest">
         <activity
+            android:name=".ui.activities.MessagingDetailActivity"
+            android:exported="true" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MessagingActivity" />
+        </activity>
+        <activity
             android:name=".ui.activities.MessagingActivity"
             android:exported="true" />
         <activity

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -18,7 +19,9 @@ import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityMainBinding
 import com.suonk.educationapptest.databinding.ActivityMessagingBinding
 import com.suonk.educationapptest.model.SchoolClass
+import com.suonk.educationapptest.model.Student
 import com.suonk.educationapptest.ui.adapters.ClassAdapter
+import com.suonk.educationapptest.ui.adapters.OnlineStudentsAdapter
 import com.suonk.educationapptest.utils.FunctionsUtils
 import com.suonk.educationapptest.utils.FunctionsUtils.initializeDrawerToolbarAndNavigation
 
@@ -33,6 +36,9 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
 
     // Firebase
     private lateinit var auth: FirebaseAuth
+
+    // Model
+    private var listOfStudentsOnline = mutableListOf<Student>()
 
     //endregion
 
@@ -100,6 +106,13 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun initializeRecyclerStudentsOnline(listOfStuds: MutableList<Student>) {
+        binding.onlineStudentsRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.onlineStudentsRecyclerView.adapter =
+            OnlineStudentsAdapter(listOfStuds, this)
+    }
+
     //endregion
 
     //region =========================================== Firebase ===========================================
@@ -107,6 +120,7 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
     private fun initFirebase() {
         auth = FirebaseAuth.getInstance()
         getUserFromFirestore()
+        getListOfStudentsOnline()
     }
 
     private fun getUserFromFirestore() {
@@ -133,6 +147,31 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
+    }
+
+    private fun getListOfStudentsOnline() {
+        val userCollectionReference = Firebase.firestore.collection("Users")
+        userCollectionReference.get().addOnSuccessListener { Students ->
+            for (studentOnLine in Students) {
+                val ifOnline = studentOnLine.data["online"] as Boolean
+                if (auth.currentUser!!.email != studentOnLine.data["email"] && ifOnline) {
+                    Log.i("getListOfStudentsOnline", "${studentOnLine.data["firstName"]}")
+                    val studentOnline = Student(
+                        studentOnLine.data["firstName"].toString(),
+                        studentOnLine.data["lastName"].toString(),
+                        studentOnLine.data["email"].toString(),
+                        studentOnLine.data["birth_year"] as Long,
+                        studentOnLine.data["image_profile_url"].toString(),
+                        studentOnLine.data["phone_number"].toString(),
+                        studentOnLine.data["year_school"] as Long,
+                        studentOnLine.data["online"] as Boolean,
+                        1
+                    )
+                    listOfStudentsOnline.add(studentOnline)
+                }
+            }
+            initializeRecyclerStudentsOnline(listOfStudentsOnline)
+        }
     }
 
     //endregion
