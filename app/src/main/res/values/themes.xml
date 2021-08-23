@@ -16,6 +16,7 @@
         <item name="backgroundColor">@color/backgroundColor</item>
         <item name="colorAccent">@color/app_color</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_back_on_pressed</item>
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
