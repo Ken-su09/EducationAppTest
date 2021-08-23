@@ -111,6 +111,10 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
         binding.userViewProfile.setOnClickListener {
             changeActivity(StudentProfileActivity::class.java as Class<Activity>)
         }
+
+        binding.floatingMessagingNewMessage.setOnClickListener {
+            changeActivity(NewMessageActivity::class.java as Class<Activity>)
+        }
     }
 
     private fun initializeRecyclerStudentsOnline(listOfStuds: MutableList<Student>) {

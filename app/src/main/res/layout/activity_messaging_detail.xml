@@ -65,34 +65,39 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/messaging_search_layout"
+            app:layout_constraintBottom_toTopOf="@+id/messaging_send_layout"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:listitem="@layout/item_message" />
 
         <RelativeLayout
-            android:id="@+id/messaging_search_layout"
+            android:id="@+id/messaging_send_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:background="@drawable/custom_edit_text_background"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                app:srcCompat="@drawable/ic_search" />
-
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/messaging_search_edit_text"
+                android:id="@+id/messaging_send_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/messaging_send_icon"
                 android:background="@color/transparent"
                 android:hint="@string/messaging_edit_text_hint"
-                android:paddingStart="45dp"
+                android:paddingStart="15dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/messaging_send_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_send" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

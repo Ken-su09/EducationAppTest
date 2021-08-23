@@ -127,6 +127,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun initFirebase() {
         auth = FirebaseAuth.getInstance()
         getUserFromFirestore()
+//        getTodaySchoolClassFromFirestore()
     }
 
     private fun getUserFromFirestore() {
@@ -152,7 +153,40 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+    }
 
+    private fun getTodaySchoolClassFromFirestore() {
+        val schoolClassCollectionReference = Firebase.firestore.collection("SchoolClass")
+        val userCollectionReference = Firebase.firestore.collection("Users")
+
+        userCollectionReference.get().addOnSuccessListener { users ->
+            for (user in users) {
+                if (auth.currentUser!!.email == user.data["email"]) {
+                    schoolClassCollectionReference.get().addOnSuccessListener { SchoolClass ->
+                        for (schoolClass in SchoolClass) {
+                            val dataSchoolClass = schoolClass.data
+
+                            if (dataSchoolClass["className"] == user.data["className"]) {
+
+                                Log.i("SchoolClass/module", "${dataSchoolClass}")
+
+                                Firebase.firestore.collection("SchoolClass").document("module")
+                                    .get()
+                                    .addOnSuccessListener { module ->
+//                                        Log.i("SchoolClass/module", "${module["professor_name"]}")
+//                                        for (module in modules) {
+//                                            Log.i("SchoolClass/module", "${module["name"]}")
+//                                        }
+                                    }
+                                break
+                            }
+                        }
+                    }
+
+                    break
+                }
+            }
+        }
     }
 
     //endregion

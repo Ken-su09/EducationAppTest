@@ -81,8 +81,4 @@ class MessagingDetailActivity : AppCompatActivity() {
     }
 
     //endregion
-
-    //region =========================================  ==========================================
-
-    //endregion
 }

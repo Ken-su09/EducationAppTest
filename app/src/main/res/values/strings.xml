@@ -24,7 +24,9 @@
     <string name="welcome_new_student_content">If so, you should have received an email with your information, allowing you to log in and access all academic and other information.</string>
     <string name="welcome_new_student_title">New Student ?</string>
     <string name="view_profile">View Profile</string>
-    <string name="messaging_edit_text_hint">Search</string>
+    <string name="messaging_edit_text_search_hint">Search</string>
+    <string name="messaging_edit_text_hint">Write your message</string>
+    <string name="new_message_search">Enter a name or a group</string>
     <string name="online">Online</string>
     <string name="messages">Messages</string>
     <string name="today_class_title">Today\'s class</string>

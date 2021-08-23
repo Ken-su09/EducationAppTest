@@ -101,17 +101,6 @@ class SettingsActivity : AppCompatActivity(), View.OnClickListener {
         darkModeSwitch()
     }
 
-    private fun initializeDrawerToolbarAndNavigation() {
-        // Toolbar
-        setSupportActionBar(binding.toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-        binding.toolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
-    }
-
     private fun darkModeSwitch() {
         binding.darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
