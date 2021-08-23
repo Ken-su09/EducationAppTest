@@ -1,7 +1,10 @@
 package com.suonk.educationapptest.ui.adapters
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +53,9 @@ class OnlineStudentsAdapter(
                 .into(itemOnlineStudentBinding.itemOnlineStudentImage)
 
             itemOnlineStudentBinding.itemClassSubjectTitle.text = student.firstName
+
+            itemOnlineStudentBinding.itemOnlineStudentLayout.tag = student.email
+            itemOnlineStudentBinding.itemOnlineStudentLayout.setOnClickListener(activity as View.OnClickListener)
         }
     }
 }

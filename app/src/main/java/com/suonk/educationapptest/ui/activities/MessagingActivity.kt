@@ -63,25 +63,32 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v?.tag != null) {
-            when (v.tag as Int) {
-                0 -> changeActivity(MainActivity::class.java as Class<Activity>)
-                1 -> {
+            if (v.id == R.id.item_online_student_layout) {
+                Log.i("onClick", "${v.tag}")
+                val intent = Intent(this@MessagingActivity, MessagingDetailActivity::class.java)
+                intent.putExtra("studentOnline", v.tag as String)
+                startActivity(intent)
+            } else {
+                when (v.tag as Int) {
+                    0 -> changeActivity(MainActivity::class.java as Class<Activity>)
+                    1 -> {
+                    }
+                    2 -> {
+                    }
+                    3 -> {
+                    }
+                    4 -> {
+                    }
+                    5 -> {
+                    }
+                    6 -> {
+                    }
+                    7 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
+                    8 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
+                    9 -> alertDialog()
                 }
-                2 -> {
-                }
-                3 -> {
-                }
-                4 -> {
-                }
-                5 -> {
-                }
-                6 -> {
-                }
-                7 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
-                8 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
-                9 -> alertDialog()
+                FunctionsUtils.updateAdapter(v.tag as Int, this)
             }
-            FunctionsUtils.updateAdapter(v.tag as Int, this)
         }
     }
 
@@ -185,6 +192,7 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
             .setPositiveButton(resources.getString(R.string.alert_dialog_yes)) { dialog, which ->
                 auth.signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
             .setNegativeButton(resources.getString(R.string.alert_dialog_no)) { dialog, which ->
                 dialog.dismiss()

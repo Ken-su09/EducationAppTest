@@ -54,8 +54,7 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v?.tag != null) {
             when (v.tag as Int) {
-                0 -> {
-                }
+                0 -> changeActivity(MainActivity::class.java as Class<Activity>)
                 1 -> {
                 }
                 2 -> {

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -16,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityMessagingBinding
 import com.suonk.educationapptest.databinding.ActivityMessagingDetailBinding
+import com.suonk.educationapptest.model.Student
 import com.suonk.educationapptest.utils.FunctionsUtils
 
 class MessagingDetailActivity : AppCompatActivity() {
@@ -24,8 +26,6 @@ class MessagingDetailActivity : AppCompatActivity() {
 
     // View
     private lateinit var binding: ActivityMessagingDetailBinding
-    private lateinit var drawer: DrawerLayout
-    private lateinit var toolbar: Toolbar
 
     // Firebase
     private lateinit var auth: FirebaseAuth
@@ -43,26 +43,14 @@ class MessagingDetailActivity : AppCompatActivity() {
 
     //region =========================================== Override ===========================================
 
-    override fun onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
     //endregion
 
     //region ========================================= InitializeUI =========================================
 
     private fun initializeUI() {
-        initializeToolbar()
-    }
-
-    private fun initializeToolbar() {
-        toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        binding.backOnPressed.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     //endregion
@@ -71,57 +59,30 @@ class MessagingDetailActivity : AppCompatActivity() {
 
     private fun initFirebase() {
         auth = FirebaseAuth.getInstance()
-//        getUserFromFirestore()
+        getUserFromListOfStudentsOnline()
     }
 
-//    private fun getUserFromFirestore() {
-//        val userCollectionReference = Firebase.firestore.collection("Users")
-//        userCollectionReference.get().addOnSuccessListener { users ->
-//            for (user in users) {
-//                if (auth.currentUser!!.email == user.data["email"]) {
-//                    val data = user.data
-//
-//                    binding.userProfileName.text =
-//                        "${data["firstName"]} ${data["lastName"]}"
-//                    data["firstName"]
-//                    data["email"]
-//                    data["lastName"]
-//                    data["birth_year"]
-//                    data["year_school"]
-//
-//                    Glide.with(this)
-//                        .load(data["image_profile_url"])
-//                        .centerCrop()
-//                        .into(binding.userProfileImage)
-//                    break
-//                }
-//            }
-//        }
-//
-//    }
+    private fun getUserFromListOfStudentsOnline() {
+        val userCollectionReference = Firebase.firestore.collection("Users")
+        userCollectionReference.get().addOnSuccessListener { Students ->
+            for (student in Students) {
+                if (intent.getStringExtra("studentOnline") == student.data["email"]) {
+                    binding.itemMessageName.text = student.data["firstName"].toString()
+
+                    Glide.with(this)
+                        .load(student.data["image_profile_url"])
+                        .centerCrop()
+                        .into(binding.itemMessageImage)
+
+                    break
+                }
+            }
+        }
+    }
 
     //endregion
 
     //region =========================================  ==========================================
-
-    private fun alertDialog() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Déconnexion")
-            .setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
-            .setPositiveButton(resources.getString(R.string.alert_dialog_yes)) { dialog, which ->
-                auth.signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
-            .setNegativeButton(resources.getString(R.string.alert_dialog_no)) { dialog, which ->
-                dialog.dismiss()
-            }
-            .show()
-    }
-
-    private fun changeActivity(cls: Class<Activity>) {
-        startActivity(Intent(this@MessagingDetailActivity, cls))
-        drawer.closeDrawer(GravityCompat.START)
-    }
 
     //endregion
 }
