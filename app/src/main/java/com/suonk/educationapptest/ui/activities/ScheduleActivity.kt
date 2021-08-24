@@ -62,10 +62,8 @@ class ScheduleActivity : AppCompatActivity(), View.OnClickListener {
                 0 -> changeActivity(MainActivity::class.java as Class<Activity>)
                 1 -> {
                 }
-                2 -> {
-                }
-                3 -> {
-                }
+                2 -> changeActivity(GradesActivity::class.java as Class<Activity>)
+                3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
                 4 -> {
                 }
                 5 -> {

@@ -62,8 +62,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 0 -> {
                 }
                 1 -> changeActivity(ScheduleActivity::class.java as Class<Activity>)
-                2 -> {
-                }
+                2 -> changeActivity(GradesActivity::class.java as Class<Activity>)
                 3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
                 4 -> {
                 }

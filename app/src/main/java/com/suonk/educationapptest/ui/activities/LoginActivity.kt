@@ -49,7 +49,11 @@ class LoginActivity : AppCompatActivity() {
         initializeUI()
     }
 
-    //region ========================================== Functions ===========================================
+    override fun onBackPressed() {
+        val intent = Intent(this@LoginActivity, WelcomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
     //region ========================================== Initialize ==========================================
 
@@ -230,6 +234,4 @@ class LoginActivity : AppCompatActivity() {
             }, 525)
         }
     }
-
-    //endregion
 }

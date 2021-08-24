@@ -31,4 +31,6 @@
     <string name="messages">Messages</string>
     <string name="today_class_title">Today\'s class</string>
     <string name="today">Today</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

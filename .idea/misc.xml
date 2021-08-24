@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/custom_backgound_white_rounded_border.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/custom_background_corner.xml" value="0.24864864864864866" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/custom_background_rounded_button.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/custom_background_white_rounded_border.xml" value="0.24864864864864866" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/custom_button_all_blue.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/custom_button_blue_border.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/custom_button_white_border.xml" value="0.38333333333333336" />
@@ -48,6 +50,7 @@
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/pressed_rounded_item.xml" value="0.24864864864864866" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/pressed_rounded_item_animation.xml" value="0.24864864864864866" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/drawable/pressed_rounded_item_pressed.xml" value="0.24864864864864866" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_grades.xml" value="0.23817567567567569" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_login.xml" value="0.17" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_messaging.xml" value="0.22" />
@@ -60,6 +63,10 @@
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_student_card.xml" value="0.22" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_student_profile.xml" value="0.33" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/activity_welcome.xml" value="0.2" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/custom_spinner_row.xml" value="0.23817567567567569" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/fragment_ing1.xml" value="0.2287162162162162" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/fragment_prep1.xml" value="0.23817567567567569" />
+        <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/fragment_prep2.xml" value="0.2287162162162162" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/item_class.xml" value="0.23817567567567569" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/item_classe.xml" value="0.5" />
         <entry key="..\:/Users/CompteDev/AndroidStudioProjects/EducationAppTest/EducationAppTest/app/src/main/res/layout/item_message.xml" value="0.5" />
