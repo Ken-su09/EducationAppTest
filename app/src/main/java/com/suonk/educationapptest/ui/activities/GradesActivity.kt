@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -16,10 +15,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.ActivityGradesBinding
-import com.suonk.educationapptest.databinding.ActivityScheduleBinding
-import com.suonk.educationapptest.model.ScheduleDay
-import com.suonk.educationapptest.ui.adapters.PageAdapter
-import com.suonk.educationapptest.ui.adapters.ScheduleDayAdapter
+import com.suonk.educationapptest.ui.adapters.GradesPageAdapter
 import com.suonk.educationapptest.utils.FunctionsUtils
 import java.util.*
 
@@ -60,15 +56,13 @@ class GradesActivity : AppCompatActivity(), View.OnClickListener {
         if (v?.tag != null) {
             when (v.tag as Int) {
                 0 -> changeActivity(MainActivity::class.java as Class<Activity>)
-                1 -> {
-                }
+                1 -> changeActivity(ScheduleActivity::class.java as Class<Activity>)
                 2 -> {
                 }
                 3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
                 4 -> {
                 }
-                5 -> {
-                }
+                5 -> changeActivity(NonAttendanceActivity::class.java as Class<Activity>)
                 6 -> {
                 }
                 7 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
@@ -103,7 +97,7 @@ class GradesActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initFragments() {
-        binding.viewPager.adapter = PageAdapter(supportFragmentManager)
+        binding.viewPager.adapter = GradesPageAdapter(supportFragmentManager)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 

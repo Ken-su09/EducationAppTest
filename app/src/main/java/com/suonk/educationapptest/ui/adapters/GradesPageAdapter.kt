@@ -7,7 +7,7 @@ import com.suonk.educationapptest.ui.fragments.Ing1Fragment
 import com.suonk.educationapptest.ui.fragments.Prep1Fragment
 import com.suonk.educationapptest.ui.fragments.Prep2Fragment
 
-class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class GradesPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return 3
     }

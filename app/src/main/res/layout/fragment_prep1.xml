@@ -44,9 +44,11 @@
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/semester1_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/semester1_title"
-                android:layout_marginTop="15dp" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -70,9 +72,11 @@
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/semester2_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/semester2_title"
-                android:layout_marginTop="15dp" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

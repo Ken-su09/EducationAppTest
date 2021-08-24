@@ -1,11 +1,10 @@
 package com.suonk.educationapptest.ui.activities
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,15 +14,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suonk.educationapptest.R
-import com.suonk.educationapptest.databinding.ActivityStudentCardBinding
+import com.suonk.educationapptest.databinding.ActivityNonAttendanceBinding
+import com.suonk.educationapptest.ui.adapters.GradesPageAdapter
+import com.suonk.educationapptest.ui.adapters.NonAttendancePageAdapter
 import com.suonk.educationapptest.utils.FunctionsUtils
 
-class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
+class NonAttendanceActivity : AppCompatActivity(), View.OnClickListener {
 
     //region ========================================== Val or Var ==========================================
 
     // View
-    private lateinit var binding: ActivityStudentCardBinding
+    private lateinit var binding: ActivityNonAttendanceBinding
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
 
@@ -34,7 +35,7 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStudentCardBinding.inflate(layoutInflater)
+        binding = ActivityNonAttendanceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initFirebase()
@@ -60,10 +61,11 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
                 3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
                 4 -> {
                 }
-                5 -> changeActivity(NonAttendanceActivity::class.java as Class<Activity>)
+                5 -> {
+                }
                 6 -> {
                 }
-                7 -> {}
+                7 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
                 8 -> changeActivity(SettingsActivity::class.java as Class<Activity>)
                 9 -> alertDialog()
             }
@@ -73,7 +75,7 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
 
     //endregion
 
-    //region ========================================== Initialize ==========================================
+    //region ========================================= InitializeUI =========================================
 
     private fun initializeUI() {
         drawer = binding.drawerLayout
@@ -84,12 +86,19 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
             toolbar,
             this,
             binding.navViewRecyclerView,
-            7
+            5
         )
 
         binding.userViewProfile.setOnClickListener {
             changeActivity(StudentProfileActivity::class.java as Class<Activity>)
         }
+
+        initFragments()
+    }
+
+    private fun initFragments() {
+        binding.viewPager.adapter = NonAttendancePageAdapter(supportFragmentManager)
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 
     //endregion
@@ -110,35 +119,25 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
 
                     binding.userProfileName.text =
                         "${data["firstName"]} ${data["lastName"]}"
-                    binding.studentCardProfileName.text =
-                        "${data["firstName"]} ${data["lastName"]}"
+                    data["firstName"]
+                    data["email"]
+                    data["lastName"]
+                    data["birth_year"]
+                    data["year_school"]
 
                     Glide.with(this)
                         .load(data["image_profile_url"])
                         .centerCrop()
                         .into(binding.userProfileImage)
-
-                    Glide.with(this)
-                        .load(data["image_profile_url"])
-                        .centerCrop()
-                        .into(binding.studentCardProfileImage)
-
-                    when (data["className"].toString()) {
-                        "Prep1" -> binding.userProfileType.text = "Année Préparatoire 1"
-                        "Prep2" -> binding.userProfileType.text = "Année Préparatoire 2"
-                        "ING1" -> binding.userProfileType.text = "Année Ingénieur 1"
-                        "ING2" -> binding.userProfileType.text = "Année Ingénieur 2"
-                        "ING3" -> binding.userProfileType.text = "Année Ingénieur 3"
-                    }
-
                     break
                 }
             }
         }
-
     }
 
     //endregion
+
+    //region =========================================  ==========================================
 
     private fun alertDialog() {
         MaterialAlertDialogBuilder(this)
@@ -156,7 +155,10 @@ class StudentCardActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun changeActivity(cls: Class<Activity>) {
-        startActivity(Intent(this@StudentCardActivity, cls))
+        startActivity(Intent(this@NonAttendanceActivity, cls))
         drawer.closeDrawer(GravityCompat.START)
     }
+
+    //endregion
+
 }

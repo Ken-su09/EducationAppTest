@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import com.suonk.educationapptest.R
 import com.suonk.educationapptest.databinding.CustomSpinnerRowBinding
 import com.suonk.educationapptest.model.Module
 
@@ -46,7 +45,7 @@ class CustomSpinnerAdapter(
     private class ItemHolder(private var binding: CustomSpinnerRowBinding) {
         fun bind(module: Module) {
             binding.spinnerRowModule.text = module.name
-            binding.spinnerRowCoefficient.text = module.coefficient
+            binding.spinnerRowCoefficient.text = "Coefficient : ${module.coefficient}"
             binding.spinnerRowGradeValue.text = module.note
 
             if (module.note.toInt() < 10) {

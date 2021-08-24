@@ -66,8 +66,7 @@ class ScheduleActivity : AppCompatActivity(), View.OnClickListener {
                 3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
                 4 -> {
                 }
-                5 -> {
-                }
+                5 -> changeActivity(NonAttendanceActivity::class.java as Class<Activity>)
                 6 -> {
                 }
                 7 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
@@ -110,6 +109,7 @@ class ScheduleActivity : AppCompatActivity(), View.OnClickListener {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.todayClassesRecyclerViewHorizontal.adapter =
             ScheduleDayAdapter(createListOfDays(), calendar.get(Calendar.DAY_OF_MONTH), this)
+        binding.todayClassesRecyclerViewHorizontal.scrollToPosition(calendar.get(Calendar.DAY_OF_MONTH) - 1)
     }
 
     //endregion

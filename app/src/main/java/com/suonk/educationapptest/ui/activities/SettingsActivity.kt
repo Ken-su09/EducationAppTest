@@ -63,8 +63,7 @@ class SettingsActivity : AppCompatActivity(), View.OnClickListener {
                 3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)
                 4 -> {
                 }
-                5 -> {
-                }
+                5 -> changeActivity(NonAttendanceActivity::class.java as Class<Activity>)
                 6 -> {
                 }
                 7 -> changeActivity(StudentCardActivity::class.java as Class<Activity>)
