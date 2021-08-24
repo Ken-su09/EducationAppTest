@@ -71,8 +71,7 @@ class MessagingActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 when (v.tag as Int) {
                     0 -> changeActivity(MainActivity::class.java as Class<Activity>)
-                    1 -> {
-                    }
+                    1 -> changeActivity(ScheduleActivity::class.java as Class<Activity>)
                     2 -> {
                     }
                     3 -> {

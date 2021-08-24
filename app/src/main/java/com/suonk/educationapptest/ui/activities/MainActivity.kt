@@ -61,8 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             when (v.tag as Int) {
                 0 -> {
                 }
-                1 -> {
-                }
+                1 -> changeActivity(ScheduleActivity::class.java as Class<Activity>)
                 2 -> {
                 }
                 3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)

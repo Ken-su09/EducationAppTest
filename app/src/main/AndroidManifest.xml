@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EducationAppTest">
         <activity
+            android:name=".ui.activities.ScheduleActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activities.NewMessageActivity"
             android:exported="true" />
         <activity

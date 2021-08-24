@@ -58,8 +58,7 @@ class SettingsActivity : AppCompatActivity(), View.OnClickListener {
         if (v?.tag != null) {
             when (v.tag as Int) {
                 0 -> changeActivity(MainActivity::class.java as Class<Activity>)
-                1 -> {
-                }
+                1 -> changeActivity(ScheduleActivity::class.java as Class<Activity>)
                 2 -> {
                 }
                 3 -> changeActivity(MessagingActivity::class.java as Class<Activity>)

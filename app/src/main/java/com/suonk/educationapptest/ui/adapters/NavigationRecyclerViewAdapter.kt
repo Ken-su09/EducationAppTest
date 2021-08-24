@@ -61,14 +61,18 @@ class NavigationRecyclerViewAdapter(
         }
 
         private fun checkIfTitleNeedDivider(title: String): Boolean {
-            if (title == activity.getString(R.string.schedule)) {
-                itemNavigationBinding.dividerTitle.text = activity.getString(R.string.studies)
-                return true
-            } else if (title == activity.getString(R.string.settings)) {
-                itemNavigationBinding.dividerTitle.text = activity.getString(R.string.other)
-                return true
-            } else {
-                return false
+            return when (title) {
+                activity.getString(R.string.schedule) -> {
+                    itemNavigationBinding.dividerTitle.text = activity.getString(R.string.studies)
+                    true
+                }
+                activity.getString(R.string.settings) -> {
+                    itemNavigationBinding.dividerTitle.text = activity.getString(R.string.other)
+                    true
+                }
+                else -> {
+                    false
+                }
             }
         }
 
